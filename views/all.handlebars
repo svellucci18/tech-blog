@@ -1,0 +1,44 @@
+<div class="blogs-container">
+  <div class="card-header col-md-12 text-center">
+    <h2>
+      &#127869 Recent Posts
+    </h2>
+  </div>
+  {{#each blogs as |blog|}}
+  <div class="blog col-md-4">
+    <p>
+      {{blog.id}}.
+      {{blog.blog_name}}
+    </p>
+  </div>
+  
+  <!-- This is the form for adding a new blog -->
+  <div class="add-blog-container">
+    <h2>
+      Post here about tech!
+    </h2>
+    <form class="new-blog-form">
+      <label for="blog_name">
+        Blog Title:
+      </label>
+      <br />
+      <textarea id="blog_name" name="blog_name" rows="2" cols="30">
+      {{blog_name}}
+    </textarea>
+      <br />
+      <label for="description">
+        Description:
+      </label>
+      <br />
+      <textarea id="description" name="description" rows="5" cols="30">
+      {{description}}
+    </textarea>
+      <br />
+      <button type="submit" value="Submit">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/add-blog.js"></script>
