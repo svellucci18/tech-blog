@@ -3,11 +3,11 @@ const Blog = require('../models/Blog');
 
 // route to get all blogs aka the landing page
 router.get('/', async (req, res) => {
-    const blogData = await Blog.findAll().catch((err) => { 
-        res.json(err);
+  const blogData = await Blog.findAll().catch((err) => { 
+      res.json(err);
       });
         // this clients const is passed in the handlebars template
-        console.log(blogData);
+        // console.log("log this:" + blogData);
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
         res.render('all-blogs', { blogs });
       });
