@@ -7,6 +7,7 @@ router.get('/', async (req, res) => {
         res.json(err);
       });
         // this clients const is passed in the handlebars template
+        console.log(blogData);
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
         res.render('all-blogs', { blogs });
       });
