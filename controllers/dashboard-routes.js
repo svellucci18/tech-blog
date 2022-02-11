@@ -1,14 +1,15 @@
 const router = require('express').Router();
 const Blog = require('../models/Blog');
+const withAuth = require('../utils/auth');
 
 // route to get all blogs aka the landing page
 router.get('/', async (req, res) => {
     const blogData = await Blog.findAll().catch((err) => { 
         res.json(err);
       });
-        // this clients const is passed in the handlebars template
+        // turns blog data into an array
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
-        res.render('all-blogs', { blogs });
+        res.render('all-blogs', { layout: 'dashboard', blogs }); // this routes to the dashboard layout instead of the main
       });
   
   // route to get one blog

@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const Blog = require('../../models/Blog');
+const Comment = require('../../models/Comment');
 
 // route to create/add a blog
 router.post('/', async (req, res) => {
   try {
-    const blogData = await Blog.create({
-      blog_name: req.body.blog_name,
+    const commentData = await Comment.create({
+      comment_name: req.body.comment_name,
       description: req.body.description,
     });
-    res.status(200).json(blogData);
+    res.status(200).json(commentData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -18,11 +18,11 @@ router.post('/', async (req, res) => {
 // This action method is the Controller. It accepts input and sends data to the Model and the View.
 router.put('/:id', async (req, res) => {
   // Where is this action method sending the data from the body of the fetch request? Why?
-  // It is sending the data to the Model so that one blog can be updated with new data in the database.
+  // It is sending the data to the Model so that one comment can be updated with new data in the database.
   try {
-    const blog = await Blog.update(
+    const comment = await Comment.update(
       {
-        blog_name: req.body.blog_name,
+        comment_name: req.body.comment_name,
         description: req.body.description,
       },
       {
@@ -32,8 +32,8 @@ router.put('/:id', async (req, res) => {
       }
     );
     // If the database is updated successfully, what happens to the updated data below?
-    // The updated data (blog) is then sent back to handler that dispatched the fetch request.
-    res.status(200).json(blog);
+    // The updated data (comment) is then sent back to handler that dispatched the fetch request.
+    res.status(200).json(comment);
   } catch (err) {
     res.status(500).json(err);
   }
