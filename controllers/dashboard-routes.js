@@ -3,7 +3,7 @@ const Blog = require('../models/Blog');
 const withAuth = require('../utils/auth');
 
 // route to get all blogs aka the landing page
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     const blogData = await Blog.findAll().catch((err) => { 
         res.json(err);
       });
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
       });
   
   // route to get one blog
-  router.get('/blog/:id', async (req, res) => {
+  router.get('/blog/:id', withAuth, async (req, res) => {
     try{ 
         const blogData = await Blog.findByPk(req.params.id);
         if(!blogData) {
