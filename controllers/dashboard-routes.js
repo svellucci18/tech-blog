@@ -12,19 +12,24 @@ router.get('/', withAuth, async (req, res) => {
         res.render('all-blogs', { layout: 'dashboard', blogs }); // this routes to the dashboard layout instead of the main
       });
   
-  // route to get one blog
-  router.get('/blog/:id', withAuth, async (req, res) => {
-    try{ 
-        const blogData = await Blog.findByPk(req.params.id);
-        if(!blogData) {
-            res.status(404).json({message: 'No blog with this id!'});
-            return;
-        }
-        const blog = blogData.get({ plain: true });
-        res.render('blog', blog);
-      } catch (err) {
-          res.status(500).json(err);
-      };     
-  });
+// route to get one blog
+router.get('/blog/:id', withAuth, async (req, res) => {
+  try{ 
+      const blogData = await Blog.findByPk(req.params.id);
+      if(!blogData) {
+          res.status(404).json({message: 'No blog with this id!'});
+          return;
+      }
+      const blog = blogData.get({ plain: true });
+      res.render('single-blog', blog);
+    } catch (err) {
+        res.status(500).json(err);
+    };     
+});
+
+router.get('/new', withAuth, async (req, res)=> {
+    res.render('new-blog', {layout: 'dashboard'})
+});
+
 
 module.exports = router;
